@@ -1,163 +1,98 @@
-# Frontend Development Template
+# shadcn Design Style Builder
 
-A modern, production-ready React + TypeScript frontend template with Vite, featuring a well-organized project structure, comprehensive tooling, and best practices for building scalable applications.
+An interactive visual builder for customizing shadcn/ui design tokens. Customize colors, typography, spacing, and border radius with a live preview, then export the styles as CSS variables or Tailwind config.
 
-## 🚀 Tech Stack
+## Tech Stack
 
 - **React 19** - UI library
 - **TypeScript** - Type safety
 - **Vite 7** - Build tool and dev server
-- **React Router 7** - Declarative routing
-- **TanStack Query** - Server state management
+- **Bun** - Package manager
 - **Tailwind CSS 4** - Utility-first CSS framework
-- **shadcn/ui** - High-quality component library
-- **Vitest** - Unit testing framework
+- **shadcn/ui (Radix UI)** - High-quality, accessible component library
+- **OKLCH Color Space** - Modern color representation for better color manipulation
 - **Biome + Ultracite** - Linting and formatting
 - **Husky** - Git hooks
 
-## ✨ Features
+## Features
 
-- ⚡ **Fast Development** - Vite HMR for instant updates
-- 🎨 **Modern UI** - shadcn/ui components with Tailwind CSS
-- 📦 **Type Safety** - Full TypeScript support
-- 🧪 **Testing Ready** - Vitest configured and ready to use
-- 🎯 **Code Quality** - Biome + Ultracite for consistent code style
-- 🔒 **Git Hooks** - Husky pre-commit and pre-push hooks
-- 📱 **Responsive** - Mobile-first design approach
-- ♿ **Accessible** - Built with accessibility in mind
+- **Color Controls** - Adjust colors with visual picker and OKLCH sliders
+- **Border Radius** - Customize global or component-specific radius
+- **Typography** - Customize font family, sizes, and weights
+- **Spacing** - Adjust padding and gap values
+- **Live Preview** - See changes in real-time with actual shadcn components
+- **Dark/Light Mode** - Built-in theme switching
+- **Export** - Copy CSS variables or Tailwind config
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 src/
-├── @types/              # TypeScript types (api/, filters/)
-├── api/                 # API layer: axios instances, queries, mutations
-│   ├── [baseURL config] # baseURL configuration
-│   └── [feature]/       # e.g. login, users, agents, events, etc.
-│       ├── queries/     # Feature-specific queries
-│       ├── mutations/   # Feature-specific mutations
-│       └── [feature].ts # Functions using baseURL and creating requests
-├── assets/              # Static assets (favicon, logos)
-├── components/          # Shared UI components
-│   ├── ui/              # shadcn/ui primitives (Button, Card, Input, etc.)
-│   ├── Cards/           # StatsProgressCard, StatsSimpleCard, Toplist
-│   ├── Charts/          # BarChart
-│   ├── DatePicker/, DateRangeFilter/, Filter/
-│   ├── Header/, ModeToggle/, Pagination/, Search/
-├── config/              # App configuration (e.g. env)
-├── constants/           # Layout and app constants
-├── contexts/            # React contexts (auth, theme, toast)
-├── hooks/               # Custom React hooks
-├── layout/              # App layouts
-├── lib/                 # Utilities and helpers
-├── pages/               # Route-level pages
-│   ├── Home/           # Dashboard sections
-│   │   ├── Agents/, Events/, Geral/, Groups/, Users/
-│   │   │   ├── [Section].tsx    # Section page
-│   │   │   └── components/      # Section-specific components only
-│   │   └── Home.tsx
-│   └── Login/
-│       └── Login.tsx
-├── providers/           # Context providers
-├── routes/              # Route definitions
-├── tests/               # Vitest test files
-│   ├── components/      # Component tests
-│   ├── hooks/           # Hook tests
-│   ├── utils/           # Utility function tests
-│   └── api/             # API layer tests
-└── utils/               # Utility functions
+├── assets/                    # Static assets (favicon, logos)
+├── components/
+│   ├── ui/                    # shadcn/ui primitives (Button, Card, Input, etc.)
+│   ├── color-picker/          # Color picker component with popover
+│   ├── card/                  # Reusable card components
+│   ├── design-builder/        # Main builder components
+│   │   ├── color-controls.tsx      # Color customization controls
+│   │   ├── spacing-controls.tsx    # Radius, padding, gap controls
+│   │   ├── typography-controls.tsx # Font family, sizes, weights
+│   │   ├── live-preview.tsx        # Live component preview
+│   │   ├── output-panel.tsx        # CSS/Tailwind config output
+│   │   └── dynamic-styles.tsx      # Dynamic CSS injection for preview
+│   ├── header/                # Header component with mode toggle
+│   └── mode-toggle/           # Dark/light mode toggle
+├── contexts/
+│   ├── design-tokens-context.tsx  # Global design tokens state
+│   └── theme-provider.tsx         # Theme context (dark/light)
+├── layout/                    # App layout wrapper
+├── lib/
+│   ├── color-utils.ts        # OKLCH color conversion utilities
+│   ├── css-generator.ts      # CSS variables & Tailwind config generator
+│   └── utils.ts              # General utilities (cn helper)
+├── pages/
+│   └── design-builder/       # Main design builder page
+└── providers/                # Context providers wrapper
 ```
 
-## 🛠️ Prerequisites
+## Prerequisites
 
-- **Node.js** 18+ (recommended: use [nvm](https://github.com/nvm-sh/nvm) or [fnm](https://github.com/Schniz/fnm))
-- **Package Manager**: `npm`, `pnpm`, or `bun` (recommended: `pnpm`)
+- **Bun** - Package manager
 
-## 📦 Installation
+## Installation
 
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd frontend-development-template-cursor
+   cd shadcn-style-builder
    ```
 
 2. **Install dependencies**
    ```bash
-   npm install
-   # or
-   pnpm install
-   # or
    bun install
    ```
 
-3. **Set up environment variables** (if needed)
+3. **Start the development server**
    ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
+   bun run dev
    ```
 
-4. **Start the development server**
-   ```bash
-   npm run dev
-   # or
-   pnpm dev
-   ```
-
-5. **Open your browser**
+4. **Open your browser**
    Navigate to `http://localhost:5173`
 
-## 📜 Available Scripts
+## Available Scripts
 
 | Script | Description |
 |--------|-------------|
-| `npm run dev` | Start development server with HMR |
-| `npm run build` | Build for production |
-| `npm run preview` | Preview production build locally |
-| `npm run lint` | Run ESLint |
-| `npm run test` | Run Vitest tests |
-| `npm run check` | Run Ultracite checks |
-| `npm run fix` | Fix issues with Ultracite |
+| `bun run dev` | Start development server with HMR |
+| `bun run build` | Build for production |
+| `bun run preview` | Preview production build locally |
+| `bun run lint` | Run Biome linting and formatting |
+| `bun run check` | Run Ultracite checks and auto-fix issues |
+| `bun run fix` | Fix issues with Ultracite |
+| `bun run test` | Run Vitest tests |
 
-## 🧪 Testing
-
-This project uses **Vitest** for unit testing. Tests are located in `src/tests/` organized by category.
-
-### Running Tests
-
-```bash
-# Run tests once
-npm run test
-
-# Run tests in watch mode
-npm run test -- --watch
-
-# Run tests with coverage
-npm run test -- --coverage
-```
-
-### Test Structure
-
-- **Component tests** → `src/tests/components/`
-- **Hook tests** → `src/tests/hooks/`
-- **Utility tests** → `src/tests/utils/`
-- **API tests** → `src/tests/api/`
-
-### Writing Tests
-
-```tsx
-import { render, screen } from "@testing-library/react"
-import { describe, it, expect } from "vitest"
-import { Button } from "@/components/ui/button"
-
-describe("Button", () => {
-	it("renders with correct text", () => {
-		render(<Button>Click me</Button>)
-		expect(screen.getByText("Click me")).toBeInTheDocument()
-	})
-})
-```
-
-## 🎨 Code Quality
+## Code Quality
 
 ### Linting & Formatting
 
@@ -165,10 +100,10 @@ This project uses **Biome** with the **Ultracite** preset for consistent code st
 
 ```bash
 # Format code
-npm run fix
+bun run fix
 
-# Check for issues
-npm run check
+# Check for issues (auto-fixes)
+bun run check
 ```
 
 ### Git Hooks
@@ -178,70 +113,21 @@ npm run check
 - **Pre-commit**: Runs linting and formatting checks
 - **Pre-push**: Runs tests (if configured)
 
-## 📝 Development Guidelines
 
-### Naming Conventions
+## Usage
 
-- **Files**: Use **kebab-case** (e.g., `user-profile.tsx`, `login-form.tsx`)
-- **Components**: PascalCase for component names (e.g., `UserProfile`, `LoginForm`)
-- **Variables/Functions**: camelCase (e.g., `getUserData`, `handleSubmit`)
+1. Select a component type (or "All Components")
+2. Adjust colors, radius, typography, and spacing using the controls
+3. See changes update in real-time in the preview
+4. Copy the generated CSS variables or Tailwind config from the output panel
 
-### Component Rules
-
-1. **Use shadcn/ui components** - Never recreate base components with raw HTML/CSS
-2. **Keep components small** - Maximum 300 lines; break into smaller components
-3. **Maximum 6 props** - Use composition or options objects for more props
-4. **No memoization** - Avoid `useMemo`, `React.memo`, `useCallback` unless profiling shows a need
-
-### Data Fetching
-
-- **Use TanStack Query** - Never use `useEffect` for API calls
-- **API layer** - Organize by feature in `src/api/[feature]/`
-- **Queries & Mutations** - Separate into `queries/` and `mutations/` directories
-
-### Styling
-
-- **Tailwind CSS** - Use utility classes, mobile-first approach
-- **Responsive breakpoints**: `sm:`, `md:`, `lg:`, `xl:`, `2xl:`
-- **Don't modify base components** - Only adjust layout/spacing, not colors/borders
-
-### Accessibility
-
-- Use semantic HTML (`<button>`, `<nav>`, `<main>`, etc.)
-- Add `aria-label` to icon-only buttons
-- Ensure keyboard navigation works
-- Maintain visible focus indicators
-
-## 🗂️ Path Aliases
-
-The project uses path aliases for cleaner imports:
-
-```tsx
-// Instead of
-import { Button } from "../../../components/ui/button"
-
-// Use
-import { Button } from "@/components/ui/button"
-```
-
-Configured in `vite.config.ts` and `tsconfig.json`.
-
-## 🔧 Configuration Files
-
-- **`vite.config.ts`** - Vite configuration
-- **`tsconfig.json`** - TypeScript configuration
-- **`biome.jsonc`** - Biome linting/formatting configuration
-- **`eslint.config.js`** - ESLint configuration
-- **`.husky/`** - Git hooks configuration
-
-## 📚 Additional Resources
+## Additional Resources
 
 - [React Documentation](https://react.dev)
 - [Vite Documentation](https://vite.dev)
-- [React Router Documentation](https://reactrouter.com)
-- [TanStack Query Documentation](https://tanstack.com/query/latest)
 - [Tailwind CSS Documentation](https://tailwindcss.com)
 - [shadcn/ui Documentation](https://ui.shadcn.com)
-- [Vitest Documentation](https://vitest.dev)
+- [OKLCH Color Space](https://oklch.com)
+- [Bun Documentation](https://bun.sh/docs)
 
 
